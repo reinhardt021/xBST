@@ -31,8 +31,8 @@ $(document).ready(function() {
         nodeRight: kevin
     };
 
-    function logBSTContacts(binarySearchTree, sortedNames) {
-        var names = [];
+    function logBSTContactsInOrder(binarySearchTree, sortedNames) {
+        // var names = [];
 
         // this prints node by node - the shape of the BST
         // console.log('This current Node is >> ' + binarySearchTree.name);
@@ -41,25 +41,27 @@ $(document).ready(function() {
         // if left node exists then recursively call this
         // else output this name
         if (binarySearchTree.nodeLeft !== null) {
-            names.push(logBSTContacts(binarySearchTree.nodeLeft, sortedNames));
+            logBSTContactsInOrder(binarySearchTree.nodeLeft, sortedNames)
+            // names.push(logBSTContacts(binarySearchTree.nodeLeft, sortedNames));
         } else {
             // console.log('no left node found');
         }
 
-        // this prints node by node - the BST in order
+        // this prints node by node - the BST in alphabetical order
         console.log(binarySearchTree.name);
         // console.log('This current Node is >> ' + binarySearchTree.name);
-        names.push(binarySearchTree.name);
+        sortedNames.push(binarySearchTree.name);
 
         // if right node exists then recursively call this
         // else return to go back up a level
         if (binarySearchTree.nodeRight !== null) {
-            names.push(logBSTContacts(binarySearchTree.nodeRight, sortedNames));
+            logBSTContactsInOrder(binarySearchTree.nodeRight, sortedNames)
+            // names.push(logBSTContacts(binarySearchTree.nodeRight, sortedNames));
         } else {
             // console.log('no right node found');
         }
 
-        return names;
+        return sortedNames;
     }
 
     // add click events for calling API here
@@ -67,7 +69,8 @@ $(document).ready(function() {
         e.preventDefault();
         console.log('User Click Registered');
         // var contacts = logBSTContacts(topOfBST);
-        var results = logBSTContacts(joe, []); // logs the output to the server
+
+        var results = logBSTContactsInOrder(joe, []); // logs the output to the server
         console.log('>>> results:', results);
     });
 
