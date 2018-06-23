@@ -32,25 +32,29 @@ $(document).ready(function() {
     };
 
     function logBSTContacts(binarySearchTree) {
+        var names = [];
         // if left node exists then recursively call this
         // else output this name
         console.log('This current Node is >> ' + binarySearchTree.name);
+        // names.push(binarySearchTree.name); // output all the names in tree order
 
         if (binarySearchTree.nodeLeft !== null) {
-            logBSTContacts(binarySearchTree.nodeLeft);
+            names.push(logBSTContacts(binarySearchTree.nodeLeft));
         } else {
-            // console.log('This current Node is >> ' + binarySearchTree.name);
             console.log('no left node found');
         }
+
+        names.push(binarySearchTree.name);
 
         // if right node exists then recursively call this
         // else return to go back up a level
         if (binarySearchTree.nodeRight !== null) {
-            logBSTContacts(binarySearchTree.nodeRight);
+            names.push(logBSTContacts(binarySearchTree.nodeRight));
         } else {
-            // return true;
             console.log('no right node found');
         }
+
+        return names;
     }
 
     // add click events for calling API here
@@ -58,7 +62,8 @@ $(document).ready(function() {
         e.preventDefault();
         console.log('User Click Registered');
         // var contacts = logBSTContacts(topOfBST);
-        logBSTContacts(joe); // logs the output to the server
+        var results = logBSTContacts(joe); // logs the output to the server
+        console.log('>>> results:', results);
     });
 
     console.log('Page Loaded');
