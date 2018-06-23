@@ -33,17 +33,21 @@ $(document).ready(function() {
 
     function logBSTContacts(binarySearchTree) {
         var names = [];
-        // if left node exists then recursively call this
-        // else output this name
-        console.log('This current Node is >> ' + binarySearchTree.name);
+
+        // this prints node by node - the shape of the BST
+        // console.log('This current Node is >> ' + binarySearchTree.name);
         // names.push(binarySearchTree.name); // output all the names in tree order
 
+        // if left node exists then recursively call this
+        // else output this name
         if (binarySearchTree.nodeLeft !== null) {
             names.push(logBSTContacts(binarySearchTree.nodeLeft));
         } else {
             console.log('no left node found');
         }
 
+        // this prints node by node - the BST in order
+        console.log('This current Node is >> ' + binarySearchTree.name);
         names.push(binarySearchTree.name);
 
         // if right node exists then recursively call this
