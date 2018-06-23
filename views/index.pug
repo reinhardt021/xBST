@@ -1,21 +1,21 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
+    div.container.is-fluid
+        div.notification
+            h1= title
+            p Welcome to #{title}
 
-    //- create search bar form []-
-    //- form(method="POST" action="/")
+            //- create search bar form []-
+            //- form(method="POST" action="/")
 
-    button.button.is-success#printBST Print
+            button.button.is-success#printBST Print
 
-//- create name input form []-
-//- create single name field for now []-
-//- create submit button
+            //- create name input form []-
+            //- create single name field for now []-
+            //- create submit button
 
-//- create row that shows the name []-
+            //- create row that shows the name []-
 
-//- recursive templating??? // for each node in the binary tree []-
-//- if that is too hard then just recursively in the backend before rendering []-
-    script
-        include user-input.js
+            //- recursive templating??? // for each node in the binary tree []-
+            //- if that is too hard then just recursively in the backend before rendering []-
