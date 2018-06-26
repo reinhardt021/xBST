@@ -81,8 +81,12 @@ $(document).ready(function() {
         console.log('User Click Registered');
         // var contacts = logBSTContacts(topOfBST);
 
+        // traverse the tree and print in order
         var results = logBSTContactsInOrder(joe, []); // logs the output to the server
         console.log('>>> results:', results);
+
+        insertNewContact(joe, 'Jackie');
+
     });
 
     console.log('Page Loaded');
