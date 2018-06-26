@@ -147,16 +147,19 @@ $(document).ready(function() {
         // var contacts = logBSTContacts(topOfBST);
 
         // traverse the tree and print in order
-        // var results = logBSTContactsInOrder(joe, []); // logs the output to the server
+        // var results = logBSTContactsInOrder(joe, []); // console.log output
         // console.log('>>> results:', results);
 
         var bstShape = logBST(joe); // logs the output to the server
         console.log('>>> before bstShape:', bstShape);
 
         var newBST = insertNewContact(joe, 'Jackie');
-
         var bstShape = logBST(newBST); // logs the output to the server
-        console.log('>>> after bstShape:', bstShape);
+        console.log('>>> after bstShape 01 :', bstShape);
+
+        var newBST02 = insertNewContact(newBST, 'Smith');
+        var bstShape02 = logBST(newBST02); // logs the output to the server
+        console.log('>>> after bstShape 02 :', bstShape02);
     });
 
     console.log('Page Loaded');
