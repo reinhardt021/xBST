@@ -36,12 +36,14 @@ $(document).ready(function() {
     // then pass a callback to do functions to the inner part
     // don't optimize too early - build other functions then refactor
     // TODO - build BST from list - CREATE
-    // TODO - insert new node into to BST - CREATE
     // TODO - Read - [x]-
-    // TODO - Update
-    // TODO - Deletion
-    // TODO - Search
-    // TODO - Rebalancing
+    // TODO - insert new node into to BST - CREATE [x]-
+    // TODO - Search []-
+    
+    // TODO - Update []-
+    // TODO - Deletion []-
+
+    // TODO - Rebalancing []-
     function logBSTContactsInOrder(binarySearchTree, sortedNames) {
         // var names = [];
 
