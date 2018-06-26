@@ -97,6 +97,49 @@ $(document).ready(function() {
         return names;
     }
 
+    function insertNewContact(binarySearchTree, newName) {
+        var newString = newName.toLowerCase();
+        var oldString = binarySearchTree.name.toLowerCase();
+
+        // if new string comes before the old string
+        // then check if left node is free
+        if (newString < oldString) {
+            // if left node is free then put it in there
+            // else go a lever deeper
+            if (binarySearchTree.nodeLeft == null) {
+                binarySearchTree.nodeLeft = {
+                    name: newName,
+                    nodeLeft: null,
+                    nodeRight: null
+                };
+            } else {
+                binarySearchTree.nodeLeft = insertNewContact(
+                    binarySearchTree.nodeLeft,
+                    newName
+                );
+            }
+        }
+
+        if (oldString < newString) {
+            // if right node is free then put it in there
+            // else go a lever deeper
+            if (binarySearchTree.nodeRight == null) {
+                binarySearchTree.nodeRight = {
+                    name: newName,
+                    nodeLeft: null,
+                    nodeRight: null
+                };
+            } else {
+                binarySearchTree.nodeRight = insertNewContact(
+                    binarySearchTree.nodeRight,
+                    newName
+                );
+            }
+        }
+
+        return binarySearchTree;
+    }
+
     // add click events for calling API here
     $('#printBST').on('click', function(e) {
         e.preventDefault();
@@ -108,10 +151,12 @@ $(document).ready(function() {
         // console.log('>>> results:', results);
 
         var bstShape = logBST(joe); // logs the output to the server
-        console.log('>>> bstShape:', bstShape);
+        console.log('>>> before bstShape:', bstShape);
 
-        // insertNewContact(joe, 'Jackie');
+        var newBST = insertNewContact(joe, 'Jackie');
 
+        var bstShape = logBST(newBST); // logs the output to the server
+        console.log('>>> after bstShape:', bstShape);
     });
 
     console.log('Page Loaded');
