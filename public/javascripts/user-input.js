@@ -75,6 +75,28 @@ $(document).ready(function() {
         return sortedNames;
     }
 
+    function logBST(binarySearchTree) {
+        var names = [];
+        // this prints node by node - the shape of the BST
+        console.log('This current Node is >> ' + binarySearchTree.name);
+
+        // if left node exists then recursively call this
+        // else output this name
+        if (binarySearchTree.nodeLeft !== null) {
+            names.push(logBST(binarySearchTree.nodeLeft));
+        }
+
+        names.push(binarySearchTree.name);
+
+        // if right node exists then recursively call this
+        // else return to go back up a level
+        if (binarySearchTree.nodeRight !== null) {
+            names.push(logBST(binarySearchTree.nodeRight));
+        }
+
+        return names;
+    }
+
     // add click events for calling API here
     $('#printBST').on('click', function(e) {
         e.preventDefault();
@@ -82,10 +104,13 @@ $(document).ready(function() {
         // var contacts = logBSTContacts(topOfBST);
 
         // traverse the tree and print in order
-        var results = logBSTContactsInOrder(joe, []); // logs the output to the server
-        console.log('>>> results:', results);
+        // var results = logBSTContactsInOrder(joe, []); // logs the output to the server
+        // console.log('>>> results:', results);
 
-        insertNewContact(joe, 'Jackie');
+        var bstShape = logBST(joe); // logs the output to the server
+        console.log('>>> bstShape:', bstShape);
+
+        // insertNewContact(joe, 'Jackie');
 
     });
 
