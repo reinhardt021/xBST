@@ -82,20 +82,24 @@ $(document).ready(function() {
         };
     }
 
+    function _saveNewContactInNode(nodeOfBST, newName) {
+        return (nodeOfBST === null) ?
+            _getNewNode(newName) :
+            insertNewContact(nodeOfBST, newName);
+    }
+
     function insertNewContact(binarySearchTree, newName) {
         var newString = newName.toLowerCase();
         var oldString = binarySearchTree.name.toLowerCase();
 
         if (newString < oldString) {
-            binarySearchTree.nodeLeft = (binarySearchTree.nodeLeft === null) ?
-                _getNewNode(newName) :
-                insertNewContact(binarySearchTree.nodeLeft, newName);
+            binarySearchTree.nodeLeft =
+                _saveNewContactInNode(binarySearchTree.nodeLeft, newName);
         }
 
         if (oldString < newString) {
-            binarySearchTree.nodeRight = (binarySearchTree.nodeRight === null) ?
-                _getNewNode(newName) :
-                insertNewContact(binarySearchTree.nodeRight, newName);
+            binarySearchTree.nodeRight =
+                _saveNewContactInNode(binarySearchTree.nodeRight, newName);
         }
 
         return binarySearchTree;
