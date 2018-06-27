@@ -125,6 +125,10 @@ $(document).ready(function() {
         var newBST02 = insertNewContact(newBST, 'Smith');
         var bstShape02 = logBST(newBST02); // logs the output to the console
         console.log('>>> after bstShape 02 :', bstShape02);
+
+        
+
+        console.log('>>> final BST', joe);
     });
 
     console.log('Page Loaded');
