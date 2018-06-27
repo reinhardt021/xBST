@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // TODO: BST
     var jack = {
         name: "Jack",
         nodeLeft: null,
@@ -31,67 +30,43 @@ $(document).ready(function() {
         nodeRight: kevin
     };
 
-    // TODO - can refactor this
-    // can use this as a basic traversal method
-    // then pass a callback to do functions to the inner part
-    // don't optimize too early - build other functions then refactor
     // TODO - build BST from list - CREATE
     // TODO - Read - [x]-
     // TODO - insert new node into to BST - CREATE [x]-
     // TODO - Search []-
-    
+
     // TODO - Update []-
     // TODO - Deletion []-
 
     // TODO - Rebalancing []-
+
+    // this prints node by node - the BST in alphabetical order
     function logBSTContactsInOrder(binarySearchTree, sortedNames) {
-        // var names = [];
-
-        // this prints node by node - the shape of the BST
-        // console.log('This current Node is >> ' + binarySearchTree.name);
-        // names.push(binarySearchTree.name); // output all the names in tree order
-
-        // if left node exists then recursively call this
-        // else output this name
         if (binarySearchTree.nodeLeft !== null) {
             logBSTContactsInOrder(binarySearchTree.nodeLeft, sortedNames)
-            // names.push(logBSTContacts(binarySearchTree.nodeLeft, sortedNames));
-        } else {
-            // console.log('no left node found');
         }
 
-        // this prints node by node - the BST in alphabetical order
-        console.log(binarySearchTree.name);
-        // console.log('This current Node is >> ' + binarySearchTree.name);
+        console.log('This current Node is >> ' + binarySearchTree.name);
         sortedNames.push(binarySearchTree.name);
 
-        // if right node exists then recursively call this
-        // else return to go back up a level
         if (binarySearchTree.nodeRight !== null) {
             logBSTContactsInOrder(binarySearchTree.nodeRight, sortedNames)
-            // names.push(logBSTContacts(binarySearchTree.nodeRight, sortedNames));
-        } else {
-            // console.log('no right node found');
         }
 
         return sortedNames;
     }
 
+    // this prints node by node - the shape of the BST
     function logBST(binarySearchTree) {
         var names = [];
-        // this prints node by node - the shape of the BST
         console.log('This current Node is >> ' + binarySearchTree.name);
 
-        // if left node exists then recursively call this
-        // else output this name
         if (binarySearchTree.nodeLeft !== null) {
             names.push(logBST(binarySearchTree.nodeLeft));
         }
 
         names.push(binarySearchTree.name);
 
-        // if right node exists then recursively call this
-        // else return to go back up a level
         if (binarySearchTree.nodeRight !== null) {
             names.push(logBST(binarySearchTree.nodeRight));
         }
@@ -99,21 +74,21 @@ $(document).ready(function() {
         return names;
     }
 
+    function _getNewNode(newName) {
+        return {
+            name: newName,
+            nodeLeft: null,
+            nodeRight: null
+        };
+    }
+
     function insertNewContact(binarySearchTree, newName) {
         var newString = newName.toLowerCase();
         var oldString = binarySearchTree.name.toLowerCase();
 
-        // if new string comes before the old string
-        // then check if left node is free
         if (newString < oldString) {
-            // if left node is free then put it in there
-            // else go a lever deeper
-            if (binarySearchTree.nodeLeft == null) {
-                binarySearchTree.nodeLeft = {
-                    name: newName,
-                    nodeLeft: null,
-                    nodeRight: null
-                };
+            if (binarySearchTree.nodeLeft === null) {
+                binarySearchTree.nodeLeft = _getNewNode(newName);
             } else {
                 binarySearchTree.nodeLeft = insertNewContact(
                     binarySearchTree.nodeLeft,
@@ -123,14 +98,8 @@ $(document).ready(function() {
         }
 
         if (oldString < newString) {
-            // if right node is free then put it in there
-            // else go a lever deeper
-            if (binarySearchTree.nodeRight == null) {
-                binarySearchTree.nodeRight = {
-                    name: newName,
-                    nodeLeft: null,
-                    nodeRight: null
-                };
+            if (binarySearchTree.nodeRight === null) {
+                binarySearchTree.nodeRight = _getNewNode(newName);
             } else {
                 binarySearchTree.nodeRight = insertNewContact(
                     binarySearchTree.nodeRight,
@@ -149,18 +118,18 @@ $(document).ready(function() {
         // var contacts = logBSTContacts(topOfBST);
 
         // traverse the tree and print in order
-        // var results = logBSTContactsInOrder(joe, []); // console.log output
-        // console.log('>>> results:', results);
+        var results = logBSTContactsInOrder(joe, []);
+        console.log('>>> results:', results);
 
-        var bstShape = logBST(joe); // logs the output to the server
+        var bstShape = logBST(joe); // logs the output to the console
         console.log('>>> before bstShape:', bstShape);
 
         var newBST = insertNewContact(joe, 'Jackie');
-        var bstShape = logBST(newBST); // logs the output to the server
+        var bstShape = logBST(newBST); // logs the output to the console
         console.log('>>> after bstShape 01 :', bstShape);
 
         var newBST02 = insertNewContact(newBST, 'Smith');
-        var bstShape02 = logBST(newBST02); // logs the output to the server
+        var bstShape02 = logBST(newBST02); // logs the output to the console
         console.log('>>> after bstShape 02 :', bstShape02);
     });
 
