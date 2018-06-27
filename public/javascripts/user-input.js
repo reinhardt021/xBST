@@ -87,25 +87,15 @@ $(document).ready(function() {
         var oldString = binarySearchTree.name.toLowerCase();
 
         if (newString < oldString) {
-            if (binarySearchTree.nodeLeft === null) {
-                binarySearchTree.nodeLeft = _getNewNode(newName);
-            } else {
-                binarySearchTree.nodeLeft = insertNewContact(
-                    binarySearchTree.nodeLeft,
-                    newName
-                );
-            }
+            binarySearchTree.nodeLeft = (binarySearchTree.nodeLeft === null) ?
+                _getNewNode(newName) :
+                insertNewContact(binarySearchTree.nodeLeft, newName);
         }
 
         if (oldString < newString) {
-            if (binarySearchTree.nodeRight === null) {
-                binarySearchTree.nodeRight = _getNewNode(newName);
-            } else {
-                binarySearchTree.nodeRight = insertNewContact(
-                    binarySearchTree.nodeRight,
-                    newName
-                );
-            }
+            binarySearchTree.nodeRight = (binarySearchTree.nodeRight === null) ?
+                _getNewNode(newName) :
+                insertNewContact(binarySearchTree.nodeRight, newName);
         }
 
         return binarySearchTree;
