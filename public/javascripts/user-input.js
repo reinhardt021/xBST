@@ -180,13 +180,13 @@ $(document).ready(function() {
         if (binarySearchTree.nodeLeft !== null) {
             // get the nested left node
             var leftBranch = _buildBasicBST(binarySearchTree.nodeLeft);
-            ulDOMElement.append($('<li>').append(leftBranch));
+            ulDOMElement.append($('<li>').text('(L)').append(leftBranch));
         }
 
         if (binarySearchTree.nodeRight !== null) {
             // get the nested right node
             var rightBranch = _buildBasicBST(binarySearchTree.nodeRight);
-            ulDOMElement.append($('<li>').append(rightBranch));
+            ulDOMElement.append($('<li>').text('(R)').append(rightBranch));
         }
 
         return ulDOMElement;
