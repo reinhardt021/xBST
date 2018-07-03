@@ -106,7 +106,6 @@ $(document).ready(function() {
 
         var currentValue = binarySearchTree.name.toLowerCase();
         var searchTermLowerCase = searchTerm.toLowerCase();
-        // console.log('>>> currentValue', currentValue);
 
         if (currentValue.indexOf(searchTermLowerCase) > -1) {
             searchResults.push(binarySearchTree.name);
@@ -136,17 +135,14 @@ $(document).ready(function() {
 
     $('#search-button').on('click',  function(e) {
         e.preventDefault();
-        var searchTerm = $('#search-input').val();
-        var results = searchContactsForString(bst, [], searchTerm);
-        console.log('>>> searchTerm', searchTerm);
-        console.log('>>> Search Results:', results);
-        console.log('>>> BST', bst);
+        var searchInput = $('#search-input');
 
         _appendValuesToList(
             $('#search-results'),
-            results
+            searchContactsForString(bst, [], searchInput.val())
         );
-        // TODO: reset to blank input
+
+        searchInput.val('');
     });
 
     $('#insert-button').on('click',  function(e) {
@@ -163,7 +159,6 @@ $(document).ready(function() {
         // TODO: log new binary search tree to the page
     });
 
-    // add click events for calling API here
     $('#print-list').on('click', function(e) {
         e.preventDefault();
         _appendValuesToList(
@@ -176,8 +171,6 @@ $(document).ready(function() {
         e.preventDefault();
         $('#contacts-in-order').empty();
     });
-
-
 
     console.log('Page Loaded');
 });
