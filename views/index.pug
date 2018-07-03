@@ -7,25 +7,29 @@ block content
                 p.level-item.has-text-centered
                     strong Binary Search Tree Experiment
                 p.level-item.has-text-centered
-                    a.link.is-info Insert
+                    a.link.is-info(href="#") Insert
                 p.level-item.has-text-centered
-                    a.link.is-info Search
+                    a.link.is-info(href="#") Search
                 p.level-item.has-text-centered
-                    a.link.is-info Delete
+                    a.link.is-info(href="#") Update
                 p.level-item.has-text-centered
-                    a.button.is-success Re-Balance
+                    a.link.is-info(href="#") Delete
+                p.level-item.has-text-centered
+                    a.button.is-success(href="#") Re-Balance
             div.notification
                 div.field.has-addons
-                    p.control
-                        input.input#insert-input(type="text", placeholder="New string")
-                    p.control
-                        button.button#insert-button Insert
+                    form
+                        p.control
+                            input.input#insert-input(type="text", placeholder="New string")
+                        p.control
+                            button.button#insert-button Insert
             div.notification
                 div.field.has-addons
-                    p.control
-                        input.input#search-input(type="text", placeholder="Name begins with")
-                    p.control
-                        button.button#search-button Search
+                    form
+                        p.control
+                            input.input#search-input(type="text", placeholder="Name begins with")
+                        p.control
+                            button.button#search-button Search
             div.notification
                 button.button.is-success#printBST Print
         section.section

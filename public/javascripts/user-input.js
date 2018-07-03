@@ -29,16 +29,12 @@ $(document).ready(function() {
         nodeLeft: jill,
         nodeRight: kevin
     };
-
-    // TODO - build BST from list - CREATE
-    // TODO - Read - [x]-
-    // TODO - insert new node into to BST - CREATE [x]-
-    // TODO - Search []-
+    var bst = joe;
 
     // TODO - Update []-
     // TODO - Deletion []-
-
     // TODO - Rebalancing []-
+    // TODO - build BST from list - CREATE
 
     // this prints node by node - the BST in alphabetical order
     function logBSTContactsInOrder(binarySearchTree, sortedNames) {
@@ -148,6 +144,7 @@ $(document).ready(function() {
         console.log('insertInput', insertInput);
 
         var newBST = insertNewContact(joe, insertInput);
+        bst = newBST;
         var bstShape = logBST(newBST); // logs the output to the console
         console.log('>>> after bstShape 01 :', bstShape);
         // reset to blank input
