@@ -173,4 +173,31 @@ $(document).ready(function() {
     });
 
     console.log('Page Loaded');
+
+    function buildBasicBST(binarySearchTree) {
+        if (binarySearchTree === null) {
+            return;
+        }
+
+        // output current node
+        var ulDOMElement = $('<ul>');
+        ulDOMElement.append($('<li>').text(binarySearchTree.name));
+
+        if (binarySearchTree.nodeLeft !== null) {
+            // get the nested left node
+            var leftBranch = buildBasicBST(binarySearchTree.nodeLeft);
+            ulDOMElement.append($('<li>').append(leftBranch));
+        }
+
+        if (binarySearchTree.nodeRight !== null) {
+            // get the nested right node
+            var rightBranch = buildBasicBST(binarySearchTree.nodeRight);
+            ulDOMElement.append($('<li>').append(rightBranch));
+        }
+
+        return ulDOMElement;
+    }
+
+    console.log('>>> bst:', bst);
+    $('#binary-search-tree').append(buildBasicBST(bst));
 });
