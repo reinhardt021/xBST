@@ -42,7 +42,7 @@ $(document).ready(function() {
             logBSTContactsInOrder(binarySearchTree.nodeLeft, sortedNames)
         }
 
-        console.log('This current Node is >> ' + binarySearchTree.name);
+        // console.log('This current Node is >> ' + binarySearchTree.name);
         sortedNames.push(binarySearchTree.name);
 
         if (binarySearchTree.nodeRight !== null) {
@@ -103,26 +103,27 @@ $(document).ready(function() {
 
     function searchContactsForString(binarySearchTree, searchResults, searchTerm) {
         if (binarySearchTree === null) {
-            return;
+            return searchResults;
         }
 
         var currentValue = binarySearchTree.name.toLowerCase();
         var searchTermLowerCase = searchTerm.toLowerCase();
-        console.log('>>> currentValue', currentValue);
+        // console.log('>>> currentValue', currentValue);
 
         if (currentValue.indexOf(searchTermLowerCase) > -1) {
             searchResults.push(binarySearchTree.name);
             searchContactsForString(binarySearchTree.nodeLeft, searchResults, searchTerm);
             searchContactsForString(binarySearchTree.nodeRight, searchResults, searchTerm);
 
-        } else {
-            if (searchTermLowerCase < currentValue) {
-                searchContactsForString(binarySearchTree.nodeLeft, searchResults, searchTerm);
-            }
+            return searchResults;
+        }
 
-            if (currentValue < searchTermLowerCase) {
-                searchContactsForString(binarySearchTree.nodeRight, searchResults, searchTerm);
-            }
+        if (searchTermLowerCase < currentValue) {
+            searchContactsForString(binarySearchTree.nodeLeft, searchResults, searchTerm);
+        }
+
+        if (currentValue < searchTermLowerCase) {
+            searchContactsForString(binarySearchTree.nodeRight, searchResults, searchTerm);
         }
 
         return searchResults;
@@ -135,7 +136,8 @@ $(document).ready(function() {
         var results = searchContactsForString(joe, [], searchTerm);
         console.log('>>> Search Results:', results);
         console.log('>>> BST', joe);
-        // reset to blank input
+
+        // TODO: reset to blank input
     });
 
     $('#insert-button').on('click',  function(e) {
@@ -143,33 +145,34 @@ $(document).ready(function() {
         var insertInput = $('#insert-input').val();
         console.log('insertInput', insertInput);
 
-        var newBST = insertNewContact(joe, insertInput);
+        var newBST = insertNewContact(bst, insertInput);
         bst = newBST;
         var bstShape = logBST(newBST); // logs the output to the console
         console.log('>>> after bstShape 01 :', bstShape);
-        // reset to blank input
+
+        // TODO: reset to blank input
+        // TODO: log new binary search tree to the page
     });
 
     // add click events for calling API here
-    $('#printBST').on('click', function(e) {
+    $('#print-bst').on('click', function(e) {
         e.preventDefault();
-        console.log('User Click Registered');
-        // var contacts = logBSTContacts(topOfBST);
-        // traverse the tree and print in order
-        var results = logBSTContactsInOrder(joe, []);
-        console.log('>>> results:', results);
-        var bstShape = logBST(joe); // logs the output to the console
+
+        var names = logBSTContactsInOrder(bst, []);
+        console.log('>>> results:', names);
+        var bstShape = logBST(bst); // logs the output to the console
         console.log('>>> before bstShape:', bstShape);
-        // --
-        // var newBST = insertNewContact(joe, 'Jackie');
-        // var bstShape = logBST(newBST); // logs the output to the console
-        // console.log('>>> after bstShape 01 :', bstShape);
-        // --
-        // var newBST02 = insertNewContact(newBST, 'Smith');
-        // var bstShape02 = logBST(newBST02); // logs the output to the console
-        // console.log('>>> after bstShape 02 :', bstShape02);
         console.log('>>> final BST', joe);
+        var contactList = $('#contacts-in-order');
+
+        names.forEach(function(name) {
+            contactList.append(
+                $('<li>').text(name)
+            );
+        });
     });
+
+
 
     console.log('Page Loaded');
 });
