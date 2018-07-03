@@ -36,13 +36,11 @@ $(document).ready(function() {
     // TODO - Rebalancing []-
     // TODO - build BST from list - CREATE
 
-    // this prints node by node - the BST in alphabetical order
     function logBSTContactsInOrder(binarySearchTree, sortedNames) {
         if (binarySearchTree.nodeLeft !== null) {
             logBSTContactsInOrder(binarySearchTree.nodeLeft, sortedNames)
         }
 
-        // console.log('This current Node is >> ' + binarySearchTree.name);
         sortedNames.push(binarySearchTree.name);
 
         if (binarySearchTree.nodeRight !== null) {
@@ -155,21 +153,22 @@ $(document).ready(function() {
     });
 
     // add click events for calling API here
-    $('#print-bst').on('click', function(e) {
+    $('#print-list').on('click', function(e) {
         e.preventDefault();
-
         var names = logBSTContactsInOrder(bst, []);
-        console.log('>>> results:', names);
-        var bstShape = logBST(bst); // logs the output to the console
-        console.log('>>> before bstShape:', bstShape);
-        console.log('>>> final BST', joe);
         var contactList = $('#contacts-in-order');
+        contactList.empty();
 
         names.forEach(function(name) {
             contactList.append(
                 $('<li>').text(name)
             );
         });
+    });
+
+    $('#clear-list').on('click', function(e) {
+        e.preventDefault();
+        $('#contacts-in-order').empty();
     });
 
 

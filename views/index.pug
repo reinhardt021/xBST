@@ -16,24 +16,23 @@ block content
                     a.link.is-info(href="#") Delete
                 p.level-item.has-text-centered
                     a.button.is-success(href="#") Re-Balance
-            div.notification
-                div.field.has-addons
+            div.notification.columns.is-centered
+                div.field.has-addons.column
                     form
-                        p.control
+                        p.control.has-text-centered
                             input.input#insert-input(type="text", placeholder="New string")
-                        p.control
-                            button.button#insert-button Insert
-            div.notification
-                div.field.has-addons
+                        p.control.has-text-centered
+                            button.button.is-dark.is-outlined#insert-button Insert
+                div.field.has-addons.column
                     form
-                        p.control
+                        p.control.has-text-centered
                             input.input#search-input(type="text", placeholder="Name begins with")
-                        p.control
-                            button.button#search-button Search
-            div.notification
-                button.button.is-success#print-bst Print List
-                button.button#clear-list Clear
-                div
-                    ul#contacts-in-order
+                        p.control.has-text-centered
+                            button.button.is-dark.is-outlined#search-button Search
+                div.column.has-text-centered
+                    button.button.is-success#print-list Print List
+                    button.button#clear-list Clear
+                    div
+                        ul#contacts-in-order
         section.section
             p This is the content
