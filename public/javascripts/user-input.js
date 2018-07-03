@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // TODO: BST
     var jack = {
         name: "Jack",
         nodeLeft: null,
@@ -30,66 +29,38 @@ $(document).ready(function() {
         nodeLeft: jill,
         nodeRight: kevin
     };
+    var bst = joe;
 
-    // TODO - can refactor this
-    // can use this as a basic traversal method
-    // then pass a callback to do functions to the inner part
-    // don't optimize too early - build other functions then refactor
-    // TODO - build BST from list - CREATE
-    // TODO - insert new node into to BST - CREATE
-    // TODO - Read - [x]-
-    // TODO - Update
-    // TODO - Deletion
-    // TODO - Search
-    // TODO - Rebalancing
+    // TODO - Update []-
+    // TODO - Deletion []-
+    // TODO - Rebalancing []-
+    // TODO - build BST from list - CREATE ['alpha', 'omega', 'beta']
+
     function logBSTContactsInOrder(binarySearchTree, sortedNames) {
-        // var names = [];
-
-        // this prints node by node - the shape of the BST
-        // console.log('This current Node is >> ' + binarySearchTree.name);
-        // names.push(binarySearchTree.name); // output all the names in tree order
-
-        // if left node exists then recursively call this
-        // else output this name
         if (binarySearchTree.nodeLeft !== null) {
             logBSTContactsInOrder(binarySearchTree.nodeLeft, sortedNames)
-            // names.push(logBSTContacts(binarySearchTree.nodeLeft, sortedNames));
-        } else {
-            // console.log('no left node found');
         }
 
-        // this prints node by node - the BST in alphabetical order
-        console.log(binarySearchTree.name);
-        // console.log('This current Node is >> ' + binarySearchTree.name);
         sortedNames.push(binarySearchTree.name);
 
-        // if right node exists then recursively call this
-        // else return to go back up a level
         if (binarySearchTree.nodeRight !== null) {
             logBSTContactsInOrder(binarySearchTree.nodeRight, sortedNames)
-            // names.push(logBSTContacts(binarySearchTree.nodeRight, sortedNames));
-        } else {
-            // console.log('no right node found');
         }
 
         return sortedNames;
     }
 
+    // this prints node by node - the shape of the BST
     function logBST(binarySearchTree) {
         var names = [];
-        // this prints node by node - the shape of the BST
         console.log('This current Node is >> ' + binarySearchTree.name);
 
-        // if left node exists then recursively call this
-        // else output this name
         if (binarySearchTree.nodeLeft !== null) {
             names.push(logBST(binarySearchTree.nodeLeft));
         }
 
         names.push(binarySearchTree.name);
 
-        // if right node exists then recursively call this
-        // else return to go back up a level
         if (binarySearchTree.nodeRight !== null) {
             names.push(logBST(binarySearchTree.nodeRight));
         }
@@ -97,70 +68,134 @@ $(document).ready(function() {
         return names;
     }
 
+    function _getNewNode(newName) {
+        return {
+            name: newName,
+            nodeLeft: null,
+            nodeRight: null
+        };
+    }
+
+    function _saveNewContactInNode(nodeOfBST, newName) {
+        return (nodeOfBST === null) ?
+            _getNewNode(newName) :
+            insertNewContact(nodeOfBST, newName);
+    }
+
     function insertNewContact(binarySearchTree, newName) {
         var newString = newName.toLowerCase();
         var oldString = binarySearchTree.name.toLowerCase();
 
-        // if new string comes before the old string
-        // then check if left node is free
         if (newString < oldString) {
-            // if left node is free then put it in there
-            // else go a lever deeper
-            if (binarySearchTree.nodeLeft == null) {
-                binarySearchTree.nodeLeft = {
-                    name: newName,
-                    nodeLeft: null,
-                    nodeRight: null
-                };
-            } else {
-                binarySearchTree.nodeLeft = insertNewContact(
-                    binarySearchTree.nodeLeft,
-                    newName
-                );
-            }
+            binarySearchTree.nodeLeft =
+                _saveNewContactInNode(binarySearchTree.nodeLeft, newName);
         }
 
         if (oldString < newString) {
-            // if right node is free then put it in there
-            // else go a lever deeper
-            if (binarySearchTree.nodeRight == null) {
-                binarySearchTree.nodeRight = {
-                    name: newName,
-                    nodeLeft: null,
-                    nodeRight: null
-                };
-            } else {
-                binarySearchTree.nodeRight = insertNewContact(
-                    binarySearchTree.nodeRight,
-                    newName
-                );
-            }
+            binarySearchTree.nodeRight =
+                _saveNewContactInNode(binarySearchTree.nodeRight, newName);
         }
 
         return binarySearchTree;
     }
 
-    // add click events for calling API here
-    $('#printBST').on('click', function(e) {
+    function searchContactsForString(binarySearchTree, searchResults, searchTerm) {
+        if (binarySearchTree === null) {
+            return searchResults;
+        }
+
+        var currentValue = binarySearchTree.name.toLowerCase();
+        var searchTermLowerCase = searchTerm.toLowerCase();
+
+        if (currentValue.indexOf(searchTermLowerCase) > -1) {
+            searchResults.push(binarySearchTree.name);
+            searchContactsForString(binarySearchTree.nodeLeft, searchResults, searchTerm);
+            searchContactsForString(binarySearchTree.nodeRight, searchResults, searchTerm);
+
+            return searchResults;
+        }
+
+        if (searchTermLowerCase < currentValue) {
+            searchContactsForString(binarySearchTree.nodeLeft, searchResults, searchTerm);
+        }
+
+        if (currentValue < searchTermLowerCase) {
+            searchContactsForString(binarySearchTree.nodeRight, searchResults, searchTerm);
+        }
+
+        return searchResults;
+    }
+
+    function _appendValuesToList(domList, values) {
+        domList.empty();
+        values.forEach(function(value) {
+            domList.append($('<li>').text(value));
+        });
+    }
+
+    $('#search-button').on('click',  function(e) {
         e.preventDefault();
-        console.log('User Click Registered');
-        // var contacts = logBSTContacts(topOfBST);
+        var searchInput = $('#search-input');
 
-        // traverse the tree and print in order
-        // var results = logBSTContactsInOrder(joe, []); // console.log output
-        // console.log('>>> results:', results);
+        _appendValuesToList(
+            $('#search-results'),
+            searchContactsForString(bst, [], searchInput.val())
+        );
 
-        var bstShape = logBST(joe); // logs the output to the server
-        console.log('>>> before bstShape:', bstShape);
+        searchInput.val('');
+    });
 
-        var newBST = insertNewContact(joe, 'Jackie');
-        var bstShape = logBST(newBST); // logs the output to the server
-        console.log('>>> after bstShape 01 :', bstShape);
+    $('#insert-button').on('click',  function(e) {
+        e.preventDefault();
+        var insertInput = $('#insert-input');
+        var newBST = insertNewContact(bst, insertInput.val());
+        insertInput.val('');
+        buildBST($('#binary-search-tree'), newBST);
+    });
 
-        var newBST02 = insertNewContact(newBST, 'Smith');
-        var bstShape02 = logBST(newBST02); // logs the output to the server
-        console.log('>>> after bstShape 02 :', bstShape02);
+    $('#print-list').on('click', function(e) {
+        e.preventDefault();
+        _appendValuesToList(
+            $('#contacts-in-order'),
+            logBSTContactsInOrder(bst, [])
+        );
+    });
+
+    $('#clear-list').on('click', function(e) {
+        e.preventDefault();
+        $('#contacts-in-order').empty();
     });
 
     console.log('Page Loaded');
+
+    function _buildBasicBST(binarySearchTree) {
+        if (binarySearchTree === null) {
+            return;
+        }
+
+        // output current node
+        var ulDOMElement = $('<ul>');
+        ulDOMElement.append($('<li>').text(binarySearchTree.name));
+
+        if (binarySearchTree.nodeLeft !== null) {
+            // get the nested left node
+            var leftBranch = _buildBasicBST(binarySearchTree.nodeLeft);
+            ulDOMElement.append($('<li>').append(leftBranch));
+        }
+
+        if (binarySearchTree.nodeRight !== null) {
+            // get the nested right node
+            var rightBranch = _buildBasicBST(binarySearchTree.nodeRight);
+            ulDOMElement.append($('<li>').append(rightBranch));
+        }
+
+        return ulDOMElement;
+    }
+
+    function buildBST(domElement, binarySearchTree) {
+        domElement.empty();
+        domElement.append(_buildBasicBST(binarySearchTree));
+    }
+
+    buildBST($('#binary-search-tree'), bst);
 });

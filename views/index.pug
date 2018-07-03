@@ -1,21 +1,47 @@
 extends layout
 
 block content
-    div.container.is-fluid
-        div.notification
-            h1= title
-            p Welcome to #{title}
-
-            //- create search bar form []-
-            //- form(method="POST" action="/")
-
-            button.button.is-success#printBST Print
-
-            //- create name input form []-
-            //- create single name field for now []-
-            //- create submit button
-
-            //- create row that shows the name []-
-
-            //- recursive templating??? // for each node in the binary tree []-
-            //- if that is too hard then just recursively in the backend before rendering []-
+    div.container
+        section.section
+            nav.level.has-background-white-ter
+                p.level-item.has-text-centered
+                    strong Binary Search Tree Experiment
+                p.level-item.has-text-centered
+                    a.link.is-info(href="#") Insert
+                p.level-item.has-text-centered
+                    a.link.is-info(href="#") Search
+                p.level-item.has-text-centered
+                    a.link.is-info(href="#") Update
+                p.level-item.has-text-centered
+                    a.link.is-info(href="#") Delete
+                p.level-item.has-text-centered
+                    a.button.is-success(href="#") Re-Balance
+            div.columns.is-centered
+                div.column.has-background-white-ter
+                    div.level
+                        form.has-text-centered
+                            input.input#insert-input(type="text", placeholder="New string")
+                            button.button.is-dark.is-outlined#insert-button Insert
+                div.column.has-background-white-ter
+                    div.level
+                        form.has-text-centered
+                                input.input#search-input(type="text", placeholder="Name begins with")
+                                button.button.is-dark.is-outlined#search-button Search
+                    div.level
+                        ul#search-results
+                div.column.has-background-white-ter.has-text-centered
+                    button.button.is-success#print-list Print List
+                    button.button#clear-list Clear
+                    div
+                        ul#contacts-in-order
+        section.section
+            div.content
+                //- p This is the content
+                //- ul
+                    //- li test
+                    //- li test02
+                    //- li
+                        //- ul
+                            //- li nest01
+                            //- li nest02
+                div#binary-search-tree
