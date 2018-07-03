@@ -17,18 +17,18 @@ block content
                 p.level-item.has-text-centered
                     a.button.is-success(href="#") Re-Balance
             div.notification.columns.is-centered
-                div.field.has-addons.column
-                    form
-                        p.control.has-text-centered
+                div.column
+                    div.level
+                        form.has-text-centered
                             input.input#insert-input(type="text", placeholder="New string")
-                        p.control.has-text-centered
                             button.button.is-dark.is-outlined#insert-button Insert
-                div.field.has-addons.column
-                    form
-                        p.control.has-text-centered
-                            input.input#search-input(type="text", placeholder="Name begins with")
-                        p.control.has-text-centered
-                            button.button.is-dark.is-outlined#search-button Search
+                div.column
+                    div.level
+                        form.has-text-centered
+                                input.input#search-input(type="text", placeholder="Name begins with")
+                                button.button.is-dark.is-outlined#search-button Search
+                    div.level
+                        ul#search-results
                 div.column.has-text-centered
                     button.button.is-success#print-list Print List
                     button.button#clear-list Clear

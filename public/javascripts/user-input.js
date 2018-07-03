@@ -127,23 +127,34 @@ $(document).ready(function() {
         return searchResults;
     }
 
+    function _appendValuesToList(domList, values) {
+        domList.empty();
+        values.forEach(function(value) {
+            domList.append($('<li>').text(value));
+        });
+    }
+
     $('#search-button').on('click',  function(e) {
         e.preventDefault();
         var searchTerm = $('#search-input').val();
+        var results = searchContactsForString(bst, [], searchTerm);
         console.log('>>> searchTerm', searchTerm);
-        var results = searchContactsForString(joe, [], searchTerm);
         console.log('>>> Search Results:', results);
-        console.log('>>> BST', joe);
+        console.log('>>> BST', bst);
 
+        _appendValuesToList(
+            $('#search-results'),
+            results
+        );
         // TODO: reset to blank input
     });
 
     $('#insert-button').on('click',  function(e) {
         e.preventDefault();
-        var insertInput = $('#insert-input').val();
-        console.log('insertInput', insertInput);
-
-        var newBST = insertNewContact(bst, insertInput);
+        var newBST = insertNewContact(
+            bst,
+            $('#insert-input').val()
+        );
         bst = newBST;
         var bstShape = logBST(newBST); // logs the output to the console
         console.log('>>> after bstShape 01 :', bstShape);
@@ -155,15 +166,10 @@ $(document).ready(function() {
     // add click events for calling API here
     $('#print-list').on('click', function(e) {
         e.preventDefault();
-        var names = logBSTContactsInOrder(bst, []);
-        var contactList = $('#contacts-in-order');
-        contactList.empty();
-
-        names.forEach(function(name) {
-            contactList.append(
-                $('<li>').text(name)
-            );
-        });
+        _appendValuesToList(
+            $('#contacts-in-order'),
+            logBSTContactsInOrder(bst, [])
+        );
     });
 
     $('#clear-list').on('click', function(e) {
