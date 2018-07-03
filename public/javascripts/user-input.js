@@ -105,29 +105,72 @@ $(document).ready(function() {
         return binarySearchTree;
     }
 
+    function searchContactsForString(binarySearchTree, searchResults, searchTerm) {
+        if (binarySearchTree === null) {
+            return;
+        }
+
+        var currentValue = binarySearchTree.name.toLowerCase();
+        var searchTermLowerCase = searchTerm.toLowerCase();
+        console.log('>>> currentValue', currentValue);
+
+        if (currentValue.indexOf(searchTermLowerCase) > -1) {
+            searchResults.push(binarySearchTree.name);
+            searchContactsForString(binarySearchTree.nodeLeft, searchResults, searchTerm);
+            searchContactsForString(binarySearchTree.nodeRight, searchResults, searchTerm);
+
+        } else {
+            if (searchTermLowerCase < currentValue) {
+                searchContactsForString(binarySearchTree.nodeLeft, searchResults, searchTerm);
+            }
+
+            if (currentValue < searchTermLowerCase) {
+                searchContactsForString(binarySearchTree.nodeRight, searchResults, searchTerm);
+            }
+        }
+
+        return searchResults;
+    }
+
+    $('#search-button').on('click',  function(e) {
+        e.preventDefault();
+        var searchTerm = $('#search-input').val();
+        console.log('>>> searchTerm', searchTerm);
+        var results = searchContactsForString(joe, [], searchTerm);
+        console.log('>>> Search Results:', results);
+        console.log('>>> BST', joe);
+        // reset to blank input
+    });
+
+    $('#insert-button').on('click',  function(e) {
+        e.preventDefault();
+        var insertInput = $('#insert-input').val();
+        console.log('insertInput', insertInput);
+
+        var newBST = insertNewContact(joe, insertInput);
+        var bstShape = logBST(newBST); // logs the output to the console
+        console.log('>>> after bstShape 01 :', bstShape);
+        // reset to blank input
+    });
+
     // add click events for calling API here
     $('#printBST').on('click', function(e) {
         e.preventDefault();
         console.log('User Click Registered');
         // var contacts = logBSTContacts(topOfBST);
-
         // traverse the tree and print in order
         var results = logBSTContactsInOrder(joe, []);
         console.log('>>> results:', results);
-
         var bstShape = logBST(joe); // logs the output to the console
         console.log('>>> before bstShape:', bstShape);
-
-        var newBST = insertNewContact(joe, 'Jackie');
-        var bstShape = logBST(newBST); // logs the output to the console
-        console.log('>>> after bstShape 01 :', bstShape);
-
-        var newBST02 = insertNewContact(newBST, 'Smith');
-        var bstShape02 = logBST(newBST02); // logs the output to the console
-        console.log('>>> after bstShape 02 :', bstShape02);
-
-        
-
+        // --
+        // var newBST = insertNewContact(joe, 'Jackie');
+        // var bstShape = logBST(newBST); // logs the output to the console
+        // console.log('>>> after bstShape 01 :', bstShape);
+        // --
+        // var newBST02 = insertNewContact(newBST, 'Smith');
+        // var bstShape02 = logBST(newBST02); // logs the output to the console
+        // console.log('>>> after bstShape 02 :', bstShape02);
         console.log('>>> final BST', joe);
     });
 
