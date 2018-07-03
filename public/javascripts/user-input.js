@@ -34,7 +34,7 @@ $(document).ready(function() {
     // TODO - Update []-
     // TODO - Deletion []-
     // TODO - Rebalancing []-
-    // TODO - build BST from list - CREATE
+    // TODO - build BST from list - CREATE ['alpha', 'omega', 'beta']
 
     function logBSTContactsInOrder(binarySearchTree, sortedNames) {
         if (binarySearchTree.nodeLeft !== null) {
@@ -147,16 +147,10 @@ $(document).ready(function() {
 
     $('#insert-button').on('click',  function(e) {
         e.preventDefault();
-        var newBST = insertNewContact(
-            bst,
-            $('#insert-input').val()
-        );
-        bst = newBST;
-        var bstShape = logBST(newBST); // logs the output to the console
-        console.log('>>> after bstShape 01 :', bstShape);
-
-        // TODO: reset to blank input
-        // TODO: log new binary search tree to the page
+        var insertInput = $('#insert-input');
+        var newBST = insertNewContact(bst, insertInput.val());
+        insertInput.val('');
+        buildBST($('#binary-search-tree'), newBST);
     });
 
     $('#print-list').on('click', function(e) {
@@ -174,7 +168,7 @@ $(document).ready(function() {
 
     console.log('Page Loaded');
 
-    function buildBasicBST(binarySearchTree) {
+    function _buildBasicBST(binarySearchTree) {
         if (binarySearchTree === null) {
             return;
         }
@@ -185,19 +179,23 @@ $(document).ready(function() {
 
         if (binarySearchTree.nodeLeft !== null) {
             // get the nested left node
-            var leftBranch = buildBasicBST(binarySearchTree.nodeLeft);
+            var leftBranch = _buildBasicBST(binarySearchTree.nodeLeft);
             ulDOMElement.append($('<li>').append(leftBranch));
         }
 
         if (binarySearchTree.nodeRight !== null) {
             // get the nested right node
-            var rightBranch = buildBasicBST(binarySearchTree.nodeRight);
+            var rightBranch = _buildBasicBST(binarySearchTree.nodeRight);
             ulDOMElement.append($('<li>').append(rightBranch));
         }
 
         return ulDOMElement;
     }
 
-    console.log('>>> bst:', bst);
-    $('#binary-search-tree').append(buildBasicBST(bst));
+    function buildBST(domElement, binarySearchTree) {
+        domElement.empty();
+        domElement.append(_buildBasicBST(binarySearchTree));
+    }
+
+    buildBST($('#binary-search-tree'), bst);
 });
