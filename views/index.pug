@@ -17,29 +17,16 @@ block content
             div.notification
                 div.field.has-addons
                     p.control
-                        input.input(type="text", placeholder="New string")
+                        input.input#insert-input(type="text", placeholder="New string")
                     p.control
-                        button.button Insert
+                        button.button#insert-button Insert
             div.notification
                 div.field.has-addons
                     p.control
-                        input.input(type="text", placeholder="Find a string")
+                        input.input#search-input(type="text", placeholder="Find a string")
                     p.control
-                        button.button Search
+                        button.button#search-button Search
             div.notification
-
-                //- create search bar form []-
-                //- form(method="POST" action="/")
-
                 button.button.is-success#printBST Print
-
-                //- create name input form []-
-                //- create single name field for now []-
-                //- create submit button
-
-                //- create row that shows the name []-
-
-                //- recursive templating??? // for each node in the binary tree []-
-                //- if that is too hard then just recursively in the backend before rendering []-
         section.section
             p This is the content
